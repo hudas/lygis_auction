@@ -1,12 +1,11 @@
 package com.company.participation;
 
-import com.company.domain.Atendee;
 import com.company.domain.Auction;
 
 public class RiskyParticipation extends Participation {
 
-    public RiskyParticipation(Auction auction, Atendee atendee) {
-        super(auction, atendee);
+    public RiskyParticipation(Auction auction, String name) {
+        super(auction, name);
     }
 
 

@@ -1,7 +1,6 @@
 package com.company;
 
 
-import com.company.domain.Atendee;
 import com.company.domain.Auction;
 
 /**
@@ -49,7 +48,7 @@ public class EntryPoint {
         Auction auction = new Auction(100, mode == WorkMode.THREADSAFE);
 
         for (int index = 0; index < NUMBER_OF_ATENDEES; index++) {
-            auction.addAtendee(new Atendee("Jonas-" + index)); // Sugeneruojam unikalų vardą dalyviui.
+            auction.addAtendee("Jonas-" + index); // Sugeneruojam unikalų vardą dalyviui.
         }
 
         return auction;

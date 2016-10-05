@@ -1,5 +1,9 @@
 package com.company.domain;
 
+import com.company.participation.Participation;
+import com.company.participation.RiskyParticipation;
+import com.company.participation.SafeParticipation;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +19,7 @@ public class Auction {
     private Boolean safe;
 
     private Integer winningBet;
-    private List<Atendee> atendees = new ArrayList<>();
+    private List<String> atendees = new ArrayList<>();
 
 
     public Auction(Integer entryPrice, boolean threadSafe) {
@@ -23,15 +27,23 @@ public class Auction {
         this.safe = threadSafe;
     }
 
-    public void addAtendee(Atendee atendee) {
-        atendees.add(atendee);
+    public void addAtendee(String name) {
+        atendees.add(name);
     }
 
     public void start(long startTime) {
         this.startTime = startTime;
 
-        for (Atendee atendee : atendees) {
-            atendee.participate(this, safe);
+        for (String atendee : atendees) {
+            Participation participation;
+
+            if (safe) {
+                participation = new SafeParticipation(this, atendee);
+            } else {
+                participation = new RiskyParticipation(this, atendee);
+            }
+
+            new Thread(participation).start();
         }
     }
 
